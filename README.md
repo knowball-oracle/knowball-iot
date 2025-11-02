@@ -8,21 +8,33 @@ O escopo original foi mantido, mas o foco prático nos permitiu validar a viabil
 
 ## Ferramentas e tecnologias exploradas 
 
-Para o desenvolvimento do protótipo, as seguintes ferramentas e tecnologias, planejadas na Sprint 1, foram exploradas: 
+Para o desenvolvimento do protótipo, as seguintes ferramentas e tecnologias, planejadas na Sprint 1, foram exploradas, formando uma arquitetura integrada e escalável: 
 
-  - **Oracle APEX:** utilizado para a criação rápida e eficiente da interface web do protótipo, permitindo a construção de     formulários para registro e consulta das denúncias. 
+  - **Oracle APEX (Application Express):** Oracle APEX é uma plataforma de desenvolvimento low-code nativa do Oracle para criar aplicações web e móveis modernas, seguras e escaláveis de forma rápida.
 
-  - **Banco de dados integrado:** o Oracle APEX utiliza uma arquitetura encapsulada em banco de dados, baseada em metadados, que garante acesso aos dados com zero latência, além de oferecer escalabilidade e excelente desempenho.   
+    - Utilizado para a criação rápida e eficiente da interface web do protótipo, permitindo a construção de formulários para       registro e consulta das denúncias. 
 
-  - **Oracle AI Services (OCI Language):** foram iniciados estudos e exploração da API de análise de sentimento para entender como integrá-la ao fluxo de dados. O objetivo é utilizar este serviço para processar o texto das denúncias, conforme planejado na Sprint 1. 
+  - **Oracle Database integrado:** o Oracle APEX utiliza uma arquitetura encapsulada em banco de dados, baseada em metadados, que garante acesso aos dados com zero latência, além de oferecer escalabilidade e excelente desempenho.
+    
+    - O banco de dados Oracle é utilizada não apenas para persistência, mas também para processamento de toda lógica de negócio através de PL/SQL.   
 
-  - **Bibliotecas python (`pandas`, `scikit-learn`):** a exploração inicial destas bibliotecas foi realizada para planejar o desenvolvimento do mecanismo de detecção de padrões, que analisará os dados em busca de denúncias recorrentes contra os mesmos indivíduos ou equipes.
+  - **Oracle AI Services (OCI Language):** serviço de IA da **Oracle Cloud** para processamento de linguagem natural, especificamente a API de análise de sentimento.
+  
+    - Foram iniciados estudos e exploração da API de análise de sentimento para entender como integrá-la ao fluxo de dados. O      objetivo é utilizar este serviço para processar o texto das denúncias, conforme planejado na Sprint 1. 
+
+  - **Bibliotecas python (`pandas`, `scikit-learn`):** a exploração inicial destas bibliotecas foi realizada para planejar o desenvolvimento do mecanismo de detecção de padrões, que analisará os dados em busca de denúncias recorrentes contra os mesmos indivíduos ou equipes:
+    
+    - `oci`: SDK oficial da **Oracle Cloud** para integração com serviços como **OCI Language**;
+    
+    - `pandas`: processamento e análise de dados de denúncias armazenadas;
+    
+    - `scikit-learn`: algoritmos de machine learning para identificação de padrões suspeitos (clustering de denúncias, detecção de anomalias).
 
 ## Funcionalidades do protótipo 
 
 O protótipo atual, desenvolvido no **Oracle APEX**, já possui as seguintes funcionalidades implementadas e em execução: 
 
-  - **Formulário de registro de denúncia:** uma interface web permite que o usuário insira as informações essenciais da denúncia, como o a partida, o árbitro e um campo de texto para o relato detalhado.
+  - **Formulário de registro de denúncia:** uma interface web permite que o usuário insira as informações essenciais da denúncia, como a partida, o árbitro e um campo de texto para o relato detalhado.
 
 ![Imagem](https://drive.google.com/uc?export=view&id=1qByk9LlRtsXpyLpju8KjdTZs_iurRyM-)
 
@@ -46,13 +58,34 @@ A principal integração implementada e testada com sucesso nesta sprint foi:
 
 Para as próximas sprints, os passos planejados para a evolução do projeto são: 
 
-  1. **Integração contínua da IA:** implementar de forma definitiva a chamada à API de análise de sentimento para que toda nova denúncia seja automaticamente classificada e marcada no banco de dados.
+  1. **Integração contínua da IA:** implementar de forma definitiva a chamada à **API de análise de sentimento** para que toda nova denúncia seja automaticamente classificada e marcada no banco de dados.
      
   2. **Desenvolvimento do módulo de análise de dados:** criar o back-end que analisará os dados armazenados para identificar padrões e tendências suspeitas, como múltiplas denúncias contra um mesmo árbitro ou time.
      
   3. **Criação de um dashboard administrativo:** desenvolver uma visão para os administradores do sistema, onde possam visualizar as denúncias, os resultados da análise de sentimento e os alertas gerados pela análise de dados.
      
   4. **Refinamento da interface (UI/UX):** melhorar a experiência do usuário no protótipo com base em feedbacks e testes de usabilidade.
+
+## Fluxo técnico
+
+O que acontece **AGORA** (Sprint 2):
+
+```bash
+   APEX     →      Database     →        APEX
+(interface)    (salva/atualiza)    (mostra protocolo)
+```
+
+O que acontecerá **DEPOIS** (Sprints futuras):
+
+```bash
+   APEX     →      Database   →     OCI Language     →    Database    →         APEX
+(interface)        (salva)      (analisa sentimento)     (atualiza)       (mostra protocolo)
+```
+
+```bash
+ Database   →      Python (pandas + scikit-learn)     →    Database    →    Dashboard APEX
+ (dados)             (detecta padrões suspeitos)           (alertas)      (visualização admin)
+```
 
 ## Vídeo de demonstração
 
