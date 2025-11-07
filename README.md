@@ -90,3 +90,7 @@ O que acontecerá **DEPOIS** (Sprints futuras):
 ## Vídeo de demonstração
 
 Segue abaixo o link do vídeo apresentando a evolução do projeto e demonstrando o funcionamento do protótipo: 
+
+> 🎬 Clique na imagem abaixo para assistir no YouTube
+
+[![Assista ao vídeo](https://img.youtube.com/vi/UewdXhF_TZ8/maxresdefault.jpg)](https://youtu.be/ctzDoaCnXF4?si=H6sil0fHTgRDbUEb)
