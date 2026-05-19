@@ -4,14 +4,14 @@
 
 ## Visão Geral
 
-Esse módulo implementa uma solução de IA para análise de sentimento em denúncias de arbitragem do sistema Knowball. O pipeline processa relatos em português, classifica o sentimento (Negative / Neutral / Positive), atribui um score de confiança e gera automaticamente o SQL necessário para atualizar a aplicação Oracle APEX - incluindo o campo de status da denúncia.
+Esse módulo implementa uma solução de IA para análise de sentimento em denúncias de arbitragem do sistema Knowball. A pipeline processa relatos em português, classifica o sentimento (Negative / Neutral / Positive), atribui um score de confiança e gera automaticamente o SQL necessário para atualizar a aplicação Oracle APEX - incluindo o campo de status da denúncia.
 
 ***
 
 ## Estrutura da aplicação
 
 ```
-sprint4/
+knowball-iot/
 ├── nlp_analyzer.py       ← Script principal de análise NLP
 ├── apex_updates.sql      ← Gerado automaticamente pelo script (UPDATE statements)
 ├── knowball_nlp.log      ← Log completo de todas as execuções
@@ -51,36 +51,9 @@ python -m textblob.download_corpora
 
 ### Arquitetura
 
-O modelo utiliza uma pipeline híbrido de três etapas que combina análise léxica de domínio com processamento de linguagem natural generalista:
+O modelo utiliza uma pipeline híbrida de três etapas que combina análise léxica de domínio com processamento de linguagem natural generalista:
 
-```
-Texto PT (entrada)
-       │
-       ▼
-┌─────────────────────────────┐
-│  Etapa 1: Léxico PT         │  Dicionário de domínio com 70+ termos
-│  (domínio arbitragem)       │  ponderados por relevância (pesos 1.5–3.5)
-└─────────────────────────────┘
-       │
-       ▼
-┌─────────────────────────────┐
-│  Etapa 2: TextBlob EN       │  Tradução PT→EN + análise de
-│  (NLP generalista)          │  polaridade e subjetividade
-└─────────────────────────────┘
-       │
-       ▼
-┌─────────────────────────────┐
-│  Etapa 3: Fusão             │  Se |léxico| > 0.15 → usa léxico PT
-│  (decisão final)            │  Caso contrário → fusão 70% PT + 30% EN
-└─────────────────────────────┘
-       │
-       ▼
-  Classificação Final
-  Negative / Neutral / Positive + Score NLP
-       │
-       ▼
-  Geração do apex_updates.sql
-```
+![Imagem](https://drive.google.com/uc?export=view&id=1bM5y-zlRJqbcgHxGJkpG6voz0zxHx-SO)
 
 ### Léxico de Domínio (Português)
 
@@ -115,7 +88,7 @@ O dicionário léxico foi construído especificamente para o contexto de arbitra
 
 > O fator de intensificação é cumulativo e limitado a no máximo 3.0×.
 
-## Cálculo da Polaridade
+### Cálculo da Polaridade
 
 A polaridade léxica é calculada pela fórmula:
 
@@ -136,7 +109,7 @@ else:
     polarity = pol_lexico × 0.70 + pol_textblob × 0.30   # fusão ponderada
 ```
 
-Esta abordagem prioriza o léxico de domínio quando ele detecta sinais fortes, e usa o TextBlob como complemento para textos ambíguos ou netros.
+Esta abordagem prioriza o léxico de domínio quando ele detecta sinais fortes, e usa o TextBlob como complemento para textos ambíguos ou neutros.
 
 ### Classificação Final
 
@@ -166,9 +139,9 @@ As entidades são retornadas com `text`, `type`, `offset` e `length`, simulando 
 
 ***
 
-## Modeos de Uso
+## Modos de Uso
 
-### Modo 1 - Análise com protocolo (gera SQL)
+### Modo 1 — Análise com protocolo (gera SQL)
 
 ```bash
 python nlp_analyzer.py "Texto do relato" KNB-023
@@ -181,12 +154,12 @@ Analisa o texto, exibe o resultado no terminal e **gera/atualiza o arquivo `apex
 ============================================================
   RETORNO OCI LANGUAGE (simulado via NLP v6)
 ============================================================
-  Protocolo : KNB-023
-  Sentimento : [NEGATIVO] Negative
-  Score NLP : 0.97
-  Scores : Negative=0.97 | Neutral=0.02 | Positive=0.01
-  Metodo : Lexico PT (dominio)
-  STATUS : Em análise
+  Protocolo: KNB-023
+  Sentimento: [NEGATIVO] Negative
+  Score NLP: 0.97
+  Scores: Negative=0.97 | Neutral=0.02 | Positive=0.01
+  Metodo: Lexico PT (dominio)
+  STATUS: Em análise
   Entidades: pênalti, marcou
 ============================================================
 ```
@@ -203,7 +176,7 @@ WHERE PROTOCOLO = 'KNB-023';
 COMMIT;
 ```
 
-## Modo 2 - Análise sem protocolo (apenas visualização)
+### Modo 2 — Análise sem protocolo (apenas visualização)
 
 ```bash
 python nlp_analyzer.py "Texto do relato"
@@ -225,30 +198,7 @@ Executa os 5 casos de teste pré-configurados e exibe um resumo final com sentim
 
 O mecanismo de integração entre o script Python e o Oracle APEX segue o seguinte fluxo:
 
-```
-[Usuário registra denúncia]        [Analista executa o script]
-         │                                    │
-         ▼                                    ▼
-  Formulário APEX                  python nlp_analyzer.py
-  (Página 2)                       "Texto do relato" KNB-023
-         │                                    │
-         ▼                                    ▼
-  KB_DENUNCIAS                     apex_updates.sql gerado
-  STATUS = 'Recebida'                         │
-                                              ▼
-                                   SQL Commands (APEX)
-                                   Cole o UPDATE → Run
-                                              │
-                                              ▼
-                                   KB_DENUNCIAS atualizado
-                                   STATUS = 'Em análise'
-                                   SENTIMENTO_OCI = 'Negative'
-                                   SCORE_NLP = 0.97
-                                              │
-                                              ▼
-                                   Página 4 — Consulta
-                                   Badge NLP visível ao usuário
-```
+![Imagem](https://drive.google.com/uc?export=view&id=1PYleqzHFUZr0na4_49KW9CHiQ1DLZT4a)
 
 ### Passo a passo de integração
 
@@ -261,7 +211,7 @@ O mecanismo de integração entre o script Python e o Oracle APEX segue o seguin
 
 3. **Abrir o arquivo** `apex_updates.sql` gerado na mesma pasta do script
 
-4. **Copiar o conteúdo** e colar no **SQL Workshop -> SQL Commands** do Oracle APEX
+4. **Copiar o conteúdo** e colar no **SQL Workshop → SQL Commands** do Oracle APEX
 
 5. **Clicar em Run** - o banco é atualizado com sentimento, score e novo status
 
@@ -286,13 +236,19 @@ O arquivo conterá os 3 UPDATEs. Cole tudo no SQL Commands e execute uma única 
 ### Tela Home (Página 1)
 Página inicial da aplicação com acesso às funcionalidades de registro de denúncias e consulta por protocolo. Apresenta o branding do sistema Knowball com as cores institucionais (cinza escuro, vermelho e branco);
 
+![Imagem](https://drive.google.com/uc?export=view&id=1jl9KdP2qG0OavF5ti9iP5ko22Yq4Z6nB)
+
 ### Tela Registrar Denúncia (Página 2)
 Formulário de cadastro da denúncia com os campos:
 - **Nome do árbitro** - árbitro alvo da denúncia
 - **Relato** - descrição detalhada da ocorrência
 - **ID da partida** - identificador da partida referenciada
 
+![Imagem](https://drive.google.com/uc?export=view&id=1qByk9LlRtsXpyLpju8KjdTZs_iurRyM-)
+
 Ao submeter, o sistema gera automaticamente o protocolo no formato `KNB-XXX` via sequence Oracle e redireciona para a tela de confirmação exibindo o número do protocolo gerado.
+
+![Imagem](https://drive.google.com/uc?export=view&id=1nAAr186F4B66xVCfgxeCiK3g2mzI47Lk)
 
 ### Tela Consultar Denúncia (Página 4)
 Permite ao usuário consultar o status de uma denúncia informando o protocolo. Exibe:
@@ -301,12 +257,20 @@ Permite ao usuário consultar o status de uma denúncia informando o protocolo. 
 - **Badge de sentimento NLP** com o resultado da análise (`Negative`, `Neutral`, `Positive`) e o score de confiança
 - Data da última atualização pela IA
 
+![Imagem](https://drive.google.com/uc?export=view&id=1tJFFHbfgIPU6Jp8-2hgA3GXJJE0mJEy1)
+
 ### Tela Dashboard Admin (Página 5)
 Painel administrativo com visualizações analíticas das denúncias registradas:
 - Gráfico de denúncias por árbitro (ranking de reclamações)
 - Distribuição por sentimento NLP (Negative / Neutral / Positive)
 - Alertas gerados pela análise de padrões (`KB_ALERTAS`)
 - Tendências temporais de registros
+
+![Imagem](https://drive.google.com/uc?export=view&id=1soUEil6ePyjONhQFDxftUpqx16AJfnnM)
+![Imagem](https://drive.google.com/uc?export=view&id=17APFCdSvxhgHATcTcASR5Syqzv4Z7AaG)
+![Imagem](https://drive.google.com/uc?export=view&id=1hDOLtwDS17B1fWnMgp4xisi4i9wR0b8H)
+![Imagem](https://drive.google.com/uc?export=view&id=1OLZ4Rvn1ybUmu_sQipAp0O0OqjEBUKa7)
+
 
 ***
 
@@ -316,3 +280,9 @@ Painel administrativo com visualizações analíticas das denúncias registradas
 - O arquivo de log `knowball_nlp.log` também é acumulativo e registra todas as execuções com timestamp, útil para demonstrar rastreabilidade.
 - A normalização de texto (função `normalizar()`) remove acentos e converte para minúsculas antes da comparação léxica, evitando falsos negativos por variações de acentuação no input.
 - O score máximo possível é `0.99` — o valor `1.0` é reservado para indicar certeza absoluta e não é utilizado para manter margem de calibração do modelo.
+
+## Vídeo Pitch
+
+Segue abaixo o link do vídeo pitch publicado no YouTube (em modo não listado) demonstrando o funcionamento da aplicação:
+
+[Clique aqui para assistir]()
