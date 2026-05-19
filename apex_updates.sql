@@ -1,0 +1,72 @@
+-- Gerado em 2026-05-19 07:40:54 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-001';
+COMMIT;
+
+-- Gerado em 2026-05-19 07:40:56 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-003';
+COMMIT;
+
+-- Gerado em 2026-05-19 07:40:58 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Positive',
+    SCORE_NLP = 0.6,
+    STATUS = 'Concluída',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-008';
+COMMIT;
+
+-- Gerado em 2026-05-19 07:40:59 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Positive',
+    SCORE_NLP = 0.99,
+    STATUS = 'Concluída',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-010';
+COMMIT;
+
+-- Gerado em 2026-05-19 07:41:00 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-013';
+COMMIT;
+
+-- Gerado em 2026-05-19 07:41:21 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Neutral',
+    SCORE_NLP = 0.5,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-022';
+COMMIT;
+
+-- Gerado em 2026-05-19 08:52:01 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-002';
+COMMIT;
+
+-- Gerado em 2026-05-19 08:55:12 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.87,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-035';
+COMMIT;
+

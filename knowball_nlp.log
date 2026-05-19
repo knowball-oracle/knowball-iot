@@ -1,0 +1,265 @@
+2026-05-19 07:40:53,158 [INFO] ============================================================
+2026-05-19 07:40:53,159 [INFO] KNOWBALL -- Analisador NLP v6
+2026-05-19 07:40:53,159 [INFO] Execucao: 19/05/2026 07:40:53
+2026-05-19 07:40:53,159 [INFO] SQL de atualizacao salvo em: apex_updates.sql
+2026-05-19 07:40:53,159 [INFO] ============================================================
+2026-05-19 07:40:53,160 [INFO] Modo demo — SQL nao sera gerado
+
+2026-05-19 07:40:53,160 [INFO] Analisando relato do protocolo KNB-001...
+2026-05-19 07:40:53,160 [INFO] Texto: "O arbitro marcou dois penaltis inexistentes. Parecia intencional para prejudicar..."
+2026-05-19 07:40:53,161 [INFO] Lexico PT — neg: ['inexistente', 'intencional', 'prejudica', 'prejudicar'] | fator: 1.0 | score_neg: 11.0 | score_pos: 0.0 | polarity: -1.0
+2026-05-19 07:40:54,925 [INFO] TextBlob EN — polarity: 0.0
+2026-05-19 07:40:54,925 [INFO] Fusao — Lexico PT (dominio) | polarity: -1.0
+2026-05-19 07:40:54,928 [INFO] ============================================================
+2026-05-19 07:40:54,928 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 07:40:54,928 [INFO] STATUS será atualizado para: 'Em análise'
+2026-05-19 07:40:54,929 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 07:40:54,929 [INFO] ------------------------------------------------------------
+2026-05-19 07:40:54,929 [INFO] -- Gerado em 2026-05-19 07:40:54 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-001';
+COMMIT;
+2026-05-19 07:40:54,929 [INFO] ============================================================
+2026-05-19 07:40:54,929 [INFO] ============================================================
+2026-05-19 07:40:54,929 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 07:40:54,929 [INFO] ============================================================
+2026-05-19 07:40:54,929 [INFO] Protocolo : KNB-001
+2026-05-19 07:40:54,929 [INFO] Sentimento: [NEGATIVO] Negative
+2026-05-19 07:40:54,929 [INFO] Score NLP : 0.99
+2026-05-19 07:40:54,929 [INFO] Scores : Negative=0.99 | Neutral=0.01 | Positive=0.0
+2026-05-19 07:40:54,929 [INFO] Metodo : Lexico PT (dominio)
+2026-05-19 07:40:54,930 [INFO] STATUS : Em análise
+2026-05-19 07:40:54,930 [INFO] Entidades : penalti, marcou
+2026-05-19 07:40:54,930 [INFO] ============================================================
+2026-05-19 07:40:54,930 [INFO] Analisando relato do protocolo KNB-003...
+2026-05-19 07:40:54,930 [INFO] Texto: "Terceira vez que esse arbitro prejudica nossa equipe. Gols anulados sem justific..."
+2026-05-19 07:40:54,930 [INFO] Lexico PT — neg: ['prejudica', 'anulados', 'terceira vez', 'sem justificativa'] | fator: 1.0 | score_neg: 10.0 | score_pos: 0.0 | polarity: -1.0
+2026-05-19 07:40:56,104 [INFO] TextBlob EN — polarity: 0.0
+2026-05-19 07:40:56,104 [INFO] Fusao — Lexico PT (dominio) | polarity: -1.0
+2026-05-19 07:40:56,105 [INFO] ============================================================
+2026-05-19 07:40:56,105 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 07:40:56,105 [INFO] STATUS será atualizado para: 'Em análise'
+2026-05-19 07:40:56,105 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 07:40:56,105 [INFO] ------------------------------------------------------------
+2026-05-19 07:40:56,105 [INFO] -- Gerado em 2026-05-19 07:40:56 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-003';
+COMMIT;
+2026-05-19 07:40:56,105 [INFO] ============================================================
+2026-05-19 07:40:56,105 [INFO] ============================================================
+2026-05-19 07:40:56,105 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 07:40:56,105 [INFO] ============================================================
+2026-05-19 07:40:56,106 [INFO] Protocolo : KNB-003
+2026-05-19 07:40:56,106 [INFO] Sentimento: [NEGATIVO] Negative
+2026-05-19 07:40:56,106 [INFO] Score NLP : 0.99
+2026-05-19 07:40:56,106 [INFO] Scores : Negative=0.99 | Neutral=0.01 | Positive=0.0
+2026-05-19 07:40:56,106 [INFO] Metodo : Lexico PT (dominio)
+2026-05-19 07:40:56,106 [INFO] STATUS : Em análise
+2026-05-19 07:40:56,106 [INFO] Entidades : Gol
+2026-05-19 07:40:56,106 [INFO] ============================================================
+2026-05-19 07:40:56,106 [INFO] Analisando relato do protocolo KNB-008...
+2026-05-19 07:40:56,106 [INFO] Texto: "Decisao polemica no final, mas pode ter sido erro sem intencao."
+2026-05-19 07:40:56,106 [INFO] Lexico PT — neg: [] | fator: 1.0 | score_neg: 0.0 | score_pos: 0.0 | polarity: 0.0
+2026-05-19 07:40:58,027 [INFO] TextBlob EN — polarity: 0.55
+2026-05-19 07:40:58,027 [INFO] Fusao — Hibrido (Lexico PT 70% + TextBlob EN 30%) | polarity: 0.165
+2026-05-19 07:40:58,028 [INFO] ============================================================
+2026-05-19 07:40:58,028 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 07:40:58,028 [INFO] STATUS será atualizado para: 'Concluída'
+2026-05-19 07:40:58,028 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 07:40:58,028 [INFO] ------------------------------------------------------------
+2026-05-19 07:40:58,029 [INFO] -- Gerado em 2026-05-19 07:40:58 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Positive',
+    SCORE_NLP = 0.6,
+    STATUS = 'Concluída',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-008';
+COMMIT;
+2026-05-19 07:40:58,029 [INFO] ============================================================
+2026-05-19 07:40:58,029 [INFO] ============================================================
+2026-05-19 07:40:58,029 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 07:40:58,029 [INFO] ============================================================
+2026-05-19 07:40:58,029 [INFO] Protocolo : KNB-008
+2026-05-19 07:40:58,029 [INFO] Sentimento: [POSITIVO] Positive
+2026-05-19 07:40:58,029 [INFO] Score NLP : 0.6
+2026-05-19 07:40:58,029 [INFO] Scores : Negative=0.12 | Neutral=0.28 | Positive=0.6
+2026-05-19 07:40:58,029 [INFO] Metodo : Hibrido (Lexico PT 70% + TextBlob EN 30%)
+2026-05-19 07:40:58,029 [INFO] STATUS : Concluída
+2026-05-19 07:40:58,030 [INFO] ============================================================
+2026-05-19 07:40:58,030 [INFO] Analisando relato do protocolo KNB-010...
+2026-05-19 07:40:58,030 [INFO] Texto: "Partida bem apitada. As decisoes foram justas e o jogo fluiu bem."
+2026-05-19 07:40:58,030 [INFO] Lexico PT — neg: [] | fator: 1.0 | score_neg: 0.0 | score_pos: 7.0 | polarity: 1.0
+2026-05-19 07:40:59,232 [INFO] TextBlob EN — polarity: 0.15
+2026-05-19 07:40:59,232 [INFO] Fusao — Lexico PT (dominio) | polarity: 1.0
+2026-05-19 07:40:59,232 [INFO] ============================================================
+2026-05-19 07:40:59,232 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 07:40:59,232 [INFO] STATUS será atualizado para: 'Concluída'
+2026-05-19 07:40:59,233 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 07:40:59,233 [INFO] ------------------------------------------------------------
+2026-05-19 07:40:59,233 [INFO] -- Gerado em 2026-05-19 07:40:59 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Positive',
+    SCORE_NLP = 0.99,
+    STATUS = 'Concluída',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-010';
+COMMIT;
+2026-05-19 07:40:59,233 [INFO] ============================================================
+2026-05-19 07:40:59,233 [INFO] ============================================================
+2026-05-19 07:40:59,233 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 07:40:59,233 [INFO] ============================================================
+2026-05-19 07:40:59,233 [INFO] Protocolo : KNB-010
+2026-05-19 07:40:59,233 [INFO] Sentimento: [POSITIVO] Positive
+2026-05-19 07:40:59,233 [INFO] Score NLP : 0.99
+2026-05-19 07:40:59,233 [INFO] Scores : Negative=0.0 | Neutral=0.01 | Positive=0.99
+2026-05-19 07:40:59,233 [INFO] Metodo : Lexico PT (dominio)
+2026-05-19 07:40:59,233 [INFO] STATUS : Concluída
+2026-05-19 07:40:59,234 [INFO] ============================================================
+2026-05-19 07:40:59,234 [INFO] Analisando relato do protocolo KNB-013...
+2026-05-19 07:40:59,234 [INFO] Texto: "Terceira partida com decisoes que favorecem o mesmo time. Nao pode ser coinciden..."
+2026-05-19 07:40:59,234 [INFO] Lexico PT — neg: ['nao pode ser coincidencia', 'coincidencia'] | fator: 1.0 | score_neg: 5.0 | score_pos: 0.0 | polarity: -1.0
+2026-05-19 07:41:00,349 [INFO] TextBlob EN — polarity: 0.0
+2026-05-19 07:41:00,349 [INFO] Fusao — Lexico PT (dominio) | polarity: -1.0
+2026-05-19 07:41:00,349 [INFO] ============================================================
+2026-05-19 07:41:00,350 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 07:41:00,350 [INFO] STATUS será atualizado para: 'Em análise'
+2026-05-19 07:41:00,350 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 07:41:00,350 [INFO] ------------------------------------------------------------
+2026-05-19 07:41:00,350 [INFO] -- Gerado em 2026-05-19 07:41:00 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-013';
+COMMIT;
+2026-05-19 07:41:00,351 [INFO] ============================================================
+2026-05-19 07:41:00,351 [INFO] ============================================================
+2026-05-19 07:41:00,351 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 07:41:00,351 [INFO] ============================================================
+2026-05-19 07:41:00,351 [INFO] Protocolo : KNB-013
+2026-05-19 07:41:00,351 [INFO] Sentimento: [NEGATIVO] Negative
+2026-05-19 07:41:00,351 [INFO] Score NLP : 0.99
+2026-05-19 07:41:00,351 [INFO] Scores : Negative=0.99 | Neutral=0.01 | Positive=0.0
+2026-05-19 07:41:00,351 [INFO] Metodo : Lexico PT (dominio)
+2026-05-19 07:41:00,352 [INFO] STATUS : Em análise
+2026-05-19 07:41:00,352 [INFO] ============================================================
+2026-05-19 07:41:00,352 [INFO] 
+===== RESUMO =====
+2026-05-19 07:41:00,352 [INFO]   KNB-001: [NEGATIVO] Negative -> STATUS: Em análise (0.99)
+2026-05-19 07:41:00,352 [INFO]   KNB-003: [NEGATIVO] Negative -> STATUS: Em análise (0.99)
+2026-05-19 07:41:00,352 [INFO]   KNB-008: [POSITIVO] Positive -> STATUS: Concluída (0.6)
+2026-05-19 07:41:00,352 [INFO]   KNB-010: [POSITIVO] Positive -> STATUS: Concluída (0.99)
+2026-05-19 07:41:00,352 [INFO]   KNB-013: [NEGATIVO] Negative -> STATUS: Em análise (0.99)
+2026-05-19 07:41:00,352 [INFO] 
+Log: knowball_nlp.log
+2026-05-19 07:41:21,382 [INFO] ============================================================
+2026-05-19 07:41:21,383 [INFO] KNOWBALL -- Analisador NLP v6
+2026-05-19 07:41:21,383 [INFO] Execucao: 19/05/2026 07:41:21
+2026-05-19 07:41:21,383 [INFO] SQL de atualizacao salvo em: apex_updates.sql
+2026-05-19 07:41:21,383 [INFO] ============================================================
+2026-05-19 07:41:21,383 [INFO] Analisando relato do protocolo KNB-022...
+2026-05-19 07:41:21,383 [INFO] Texto: "Texto"
+2026-05-19 07:41:21,383 [INFO] Lexico PT — neg: [] | fator: 1.0 | score_neg: 0.0 | score_pos: 0.0 | polarity: 0.0
+2026-05-19 07:41:21,601 [INFO] TextBlob EN — polarity: 0.0
+2026-05-19 07:41:21,601 [INFO] Fusao — Hibrido (Lexico PT 70% + TextBlob EN 30%) | polarity: 0.0
+2026-05-19 07:41:21,602 [INFO] ============================================================
+2026-05-19 07:41:21,602 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 07:41:21,602 [INFO] STATUS será atualizado para: 'Em análise'
+2026-05-19 07:41:21,602 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 07:41:21,603 [INFO] ------------------------------------------------------------
+2026-05-19 07:41:21,603 [INFO] -- Gerado em 2026-05-19 07:41:21 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Neutral',
+    SCORE_NLP = 0.5,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-022';
+COMMIT;
+2026-05-19 07:41:21,603 [INFO] ============================================================
+2026-05-19 07:41:21,603 [INFO] ============================================================
+2026-05-19 07:41:21,603 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 07:41:21,603 [INFO] ============================================================
+2026-05-19 07:41:21,603 [INFO] Protocolo : KNB-022
+2026-05-19 07:41:21,603 [INFO] Sentimento: [NEUTRO] Neutral
+2026-05-19 07:41:21,603 [INFO] Score NLP : 0.5
+2026-05-19 07:41:21,603 [INFO] Scores : Negative=0.25 | Neutral=0.5 | Positive=0.25
+2026-05-19 07:41:21,604 [INFO] Metodo : Hibrido (Lexico PT 70% + TextBlob EN 30%)
+2026-05-19 07:41:21,604 [INFO] STATUS : Em análise
+2026-05-19 07:41:21,604 [INFO] ============================================================
+2026-05-19 08:52:00,973 [INFO] ============================================================
+2026-05-19 08:52:00,974 [INFO] KNOWBALL -- Analisador NLP v6
+2026-05-19 08:52:00,974 [INFO] Execucao: 19/05/2026 08:52:00
+2026-05-19 08:52:00,974 [INFO] SQL de atualizacao salvo em: apex_updates.sql
+2026-05-19 08:52:00,974 [INFO] ============================================================
+2026-05-19 08:52:00,975 [INFO] Analisando relato do protocolo KNB-002...
+2026-05-19 08:52:00,975 [INFO] Texto: "Terceira vez consecutiva que o árbitro Anderson Daronco apita jogos do nosso tim..."
+2026-05-19 08:52:00,975 [INFO] Lexico PT — neg: ['prejudica', 'anulados', 'terceira vez', 'consecutiva', 'sempre o mesmo', 'padrao', 'nao pode ser coincidencia', 'coincidencia', 'sem justificativa'] | fator: 1.3 | score_neg: 28.6 | score_pos: 0.0 | polarity: -1.0
+2026-05-19 08:52:01,163 [INFO] Fusao — Lexico PT (fallback SSL) | polarity: -1.0
+2026-05-19 08:52:01,164 [INFO] ============================================================
+2026-05-19 08:52:01,165 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 08:52:01,165 [INFO] STATUS será atualizado para: 'Em análise'
+2026-05-19 08:52:01,165 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 08:52:01,165 [INFO] ------------------------------------------------------------
+2026-05-19 08:52:01,166 [INFO] -- Gerado em 2026-05-19 08:52:01 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.99,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-002';
+COMMIT;
+2026-05-19 08:52:01,166 [INFO] ============================================================
+2026-05-19 08:52:01,166 [INFO] ============================================================
+2026-05-19 08:52:01,167 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 08:52:01,167 [INFO] ============================================================
+2026-05-19 08:52:01,167 [INFO] Protocolo : KNB-002
+2026-05-19 08:52:01,167 [INFO] Sentimento: [NEGATIVO] Negative
+2026-05-19 08:52:01,167 [INFO] Score NLP : 0.99
+2026-05-19 08:52:01,167 [INFO] Scores : Negative=0.99 | Neutral=0.01 | Positive=0.0
+2026-05-19 08:52:01,168 [INFO] Metodo : Lexico PT (fallback SSL)
+2026-05-19 08:52:01,168 [INFO] STATUS : Em análise
+2026-05-19 08:52:01,168 [INFO] Entidades : gol
+2026-05-19 08:52:01,168 [INFO] ============================================================
+2026-05-19 08:55:12,061 [INFO] ============================================================
+2026-05-19 08:55:12,061 [INFO] KNOWBALL -- Analisador NLP v6
+2026-05-19 08:55:12,061 [INFO] Execucao: 19/05/2026 08:55:12
+2026-05-19 08:55:12,061 [INFO] SQL de atualizacao salvo em: apex_updates.sql
+2026-05-19 08:55:12,062 [INFO] ============================================================
+2026-05-19 08:55:12,062 [INFO] Analisando relato do protocolo KNB-035...
+2026-05-19 08:55:12,062 [INFO] Texto: "Possível penalti marcado indevidamente para a equipe mandante"
+2026-05-19 08:55:12,062 [INFO] Lexico PT — neg: ['indevida'] | fator: 1.5 | score_neg: 3.75 | score_pos: 0.0 | polarity: -0.75
+2026-05-19 08:55:12,686 [INFO] Fusao — Lexico PT (fallback SSL) | polarity: -0.75
+2026-05-19 08:55:12,686 [INFO] ============================================================
+2026-05-19 08:55:12,686 [INFO] SQL gerado -> apex_updates.sql
+2026-05-19 08:55:12,686 [INFO] STATUS será atualizado para: 'Em análise'
+2026-05-19 08:55:12,686 [INFO] Cole no SQL Commands do APEX:
+2026-05-19 08:55:12,687 [INFO] ------------------------------------------------------------
+2026-05-19 08:55:12,687 [INFO] -- Gerado em 2026-05-19 08:55:12 pelo nlp_analyzer.py
+UPDATE KB_DENUNCIAS
+SET SENTIMENTO_OCI = 'Negative',
+    SCORE_NLP = 0.87,
+    STATUS = 'Em análise',
+    DT_ATUALIZACAO = SYSDATE
+WHERE PROTOCOLO = 'KNB-035';
+COMMIT;
+2026-05-19 08:55:12,687 [INFO] ============================================================
+2026-05-19 08:55:12,687 [INFO] ============================================================
+2026-05-19 08:55:12,687 [INFO] RETORNO OCI LANGUAGE (simulado via NLP v6)
+2026-05-19 08:55:12,687 [INFO] ============================================================
+2026-05-19 08:55:12,687 [INFO] Protocolo : KNB-035
+2026-05-19 08:55:12,687 [INFO] Sentimento: [NEGATIVO] Negative
+2026-05-19 08:55:12,687 [INFO] Score NLP : 0.87
+2026-05-19 08:55:12,687 [INFO] Scores : Negative=0.87 | Neutral=0.09 | Positive=0.04
+2026-05-19 08:55:12,687 [INFO] Metodo : Lexico PT (fallback SSL)
+2026-05-19 08:55:12,687 [INFO] STATUS : Em análise
+2026-05-19 08:55:12,687 [INFO] Entidades : penalti
+2026-05-19 08:55:12,687 [INFO] ============================================================
