@@ -285,4 +285,4 @@ Painel administrativo com visualizações analíticas das denúncias registradas
 
 Segue abaixo o link do vídeo pitch publicado no YouTube (em modo não listado) demonstrando o funcionamento da aplicação:
 
-[Clique aqui para assistir]()
+[Clique aqui para assistir](https://youtu.be/GV4OCUHJgMc?si=zAHgC_PP4cQoIEHs)
